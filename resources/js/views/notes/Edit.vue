@@ -3,41 +3,48 @@
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header">Make new Note</div>
+          <div class="card-header">Edit Note</div>
           <div class="card-body">
-            <form action="#" method="post" @submit.prevent="storeNote">
+            <form action="#" method="post" @submit.prevent="update">
               <div class="form-group">
                 <label for="title">Title</label>
                 <input
                   type="text"
-                  id="title"
                   v-model="form.title"
+                  id="title"
                   class="form-control"
                 />
-                <div
-                  class="mt-2 text-danger"
-                  v-if="theErrors.title"
-                  v-text="theErrors.title[0]"
-                ></div>
+                <div v-if="theErrors.title" class="mt-2 text-danger">
+                  {{ theErrors.title[0] }}
+                </div>
               </div>
+
               <div class="form-group">
                 <label for="subject">Subject</label>
                 <select
-                  class="form-control"
-                  v-model="form.subject"
+                  @change="selectedSubject"
                   id="subject"
+                  class="form-control"
                 >
                   <option
-                    v-for="subject in subjects"
-                    :key="subject.id"
-                    :value="subject.id"
-                    v-text="subject.name"
+                    :value="form.subjectId"
+                    v-text="form.subject"
                   ></option>
+                  <template v-for="subject in subjects">
+                    <option
+                      v-if="form.subjectId != subject.id"
+                      :key="subject.id"
+                      :value="subject.id"
+                    >
+                      {{ subject.name }}
+                    </option>
+                  </template>
                 </select>
                 <div v-if="theErrors.subject" class="mt-2 text-danger">
                   {{ theErrors.subject[0] }}
                 </div>
               </div>
+
               <div class="form-group">
                 <label for="description">Description</label>
                 <textarea
@@ -50,12 +57,8 @@
                   {{ theErrors.description[0] }}
                 </div>
               </div>
-              <button
-                type="submit"
-                class="btn btn-primary d-flex align-items-center"
-              >
-                Save
-              </button>
+
+              <button type="submit" class="btn btn-primary">Update</button>
             </form>
           </div>
         </div>
@@ -68,42 +71,55 @@
 export default {
   data() {
     return {
-      form: {
-        title: "",
-        description: "",
-        subject: "",
-      },
+      form: [],
       subjects: [],
       theErrors: [],
+      selected: "",
     };
   },
+
+  mounted() {
+    this.getSubjects();
+    this.getNote();
+  },
+
   methods: {
-    // get subjects from API
     async getSubjects() {
       let response = await axios.get("/api/subjects");
       if (response.status === 200) {
         this.subjects = response.data;
       }
     },
-    // store form create note
-    async storeNote() {
+
+    async getNote() {
+      let { data } = await axios.get(
+        `/api/notes/${this.$route.params.noteSlug}`
+      );
+      this.form = data.data;
+    },
+
+    selectedSubject(e) {
+      this.selected = e.target.value;
+    },
+
+    // update the note
+    async update() {
       try {
-        let response = await axios.post(
-          "/api/notes/create-new-note",
+        this.form["subject"] = this.selected || this.form.subjectId;
+
+        let response = await axios.patch(
+          `/api/notes/${this.$route.params.noteSlug}/edit`,
           this.form
         );
         if (response.status === 200) {
-          (this.form.title = ""),
-            (this.form.subject = ""),
-            (this.form.description = ""),
-            (this.theErrors = []),
-            this.$toasted.show(response.data.message, {
-              type: "success",
-              icon: "check-double",
-              duration: 3000,
-              position: "top-center",
-              theme: "bubble",
-            });
+          this.$toasted.show(response.data.message, {
+            type: "success",
+            icon: "check-double",
+            duration: 3000,
+            position: "top-center",
+            theme: "bubble",
+          });
+          this.$router.push("/notes/table");
         }
       } catch (error) {
         this.$toasted.show("Something went wrong.", {
@@ -116,9 +132,6 @@ export default {
         this.theErrors = error.response.data.errors;
       }
     },
-  },
-  mounted() {
-    this.getSubjects();
   },
 };
 </script>
