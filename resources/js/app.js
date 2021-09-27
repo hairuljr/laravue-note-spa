@@ -8,11 +8,16 @@ try {
 
     require('bootstrap');
 } catch (e) {}
-
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
+import Toasted from 'vue-toasted'
 
+Vue.use(Toasted, {
+    iconPack: 'fontawesome'
+})
 Vue.use(VueRouter)
 Vue.component('navigation', require('./components/Navigation.vue').default);
 
