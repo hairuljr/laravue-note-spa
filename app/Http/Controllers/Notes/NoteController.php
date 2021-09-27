@@ -66,7 +66,6 @@ class NoteController extends Controller
 
     public function destroy(Note $note)
     {
-        sleep(2);
         $note->delete();
 
         return response()->json([

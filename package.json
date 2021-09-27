@@ -28,6 +28,7 @@
     "dependencies": {
         "global": "^4.4.0",
         "vue-router": "^3.5.2",
+        "vue-sweetalert2": "^5.0.2",
         "vue-toasted": "^1.1.28"
     }
 }
