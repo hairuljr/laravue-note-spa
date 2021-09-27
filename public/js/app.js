@@ -6729,6 +6729,92 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6738,7 +6824,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         subject: ""
       },
       subjects: [],
-      theErrors: []
+      theErrors: [],
+      loading: false
     };
   },
   methods: {
@@ -6780,15 +6867,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                _this2.loading = true;
+                _context2.prev = 1;
+                _context2.next = 4;
                 return axios.post("/api/notes/create-new-note", _this2.form);
 
-              case 3:
+              case 4:
                 response = _context2.sent;
 
                 if (response.status === 200) {
-                  _this2.form.title = "", _this2.form.subject = "", _this2.form.description = "", _this2.theErrors = [], _this2.$toasted.show(response.data.message, {
+                  _this2.form.title = "", _this2.form.subject = "", _this2.form.description = "", _this2.theErrors = [], _this2.loading = false;
+
+                  _this2.$toasted.show(response.data.message, {
                     type: "success",
                     icon: "check-double",
                     duration: 3000,
@@ -6799,12 +6889,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.$router.push("/notes/table");
                 }
 
-                _context2.next = 11;
+                _context2.next = 13;
                 break;
 
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](0);
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
+                _this2.loading = false;
 
                 _this2.$toasted.show("Something went wrong.", {
                   type: "error",
@@ -6816,12 +6907,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.theErrors = _context2.t0.response.data.errors;
 
-              case 11:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[1, 8]]);
       }))();
     }
   },
@@ -7001,13 +7092,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: [],
       subjects: [],
       theErrors: [],
-      selected: ""
+      selected: "",
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -7081,15 +7257,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.prev = 0;
+                _this3.loading = true;
+                _context3.prev = 1;
                 _this3.form["subject"] = _this3.selected || _this3.form.subjectId;
-                _context3.next = 4;
+                _context3.next = 5;
                 return axios.patch("/api/notes/".concat(_this3.$route.params.noteSlug, "/edit"), _this3.form);
 
-              case 4:
+              case 5:
                 response = _context3.sent;
 
                 if (response.status === 200) {
+                  _this3.loading = false;
+
                   _this3.$toasted.show(response.data.message, {
                     type: "success",
                     icon: "check-double",
@@ -7101,12 +7280,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.$router.push("/notes/table");
                 }
 
-                _context3.next = 12;
+                _context3.next = 14;
                 break;
 
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](0);
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](1);
+                _this3.loading = false;
 
                 _this3.$toasted.show("Something went wrong.", {
                   type: "error",
@@ -7118,12 +7298,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this3.theErrors = _context3.t0.response.data.errors;
 
-              case 12:
+              case 14:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 8]]);
+        }, _callee3, null, [[1, 9]]);
       }))();
     }
   }
@@ -27974,11 +28154,172 @@ var render = function() {
                       staticClass: "btn btn-primary d-flex align-items-center",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("\n              Save\n            ")]
+                    [
+                      _vm._v("\n              Save\n              "),
+                      _vm.loading
+                        ? [
+                            _c(
+                              "svg",
+                              {
+                                staticStyle: {
+                                  margin: "auto",
+                                  background: "none",
+                                  display: "block",
+                                  "shape-rendering": "auto"
+                                },
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                                  width: "30px",
+                                  height: "22px",
+                                  viewBox: "0 0 100 100",
+                                  preserveAspectRatio: "xMidYMid"
+                                }
+                              },
+                              [
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "17.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#85a2b6"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "18;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.2s"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "64;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.2s"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "42.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#bbcedd"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "20.999999999999996;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.1s"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "58.00000000000001;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.1s"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "67.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#dce4eb"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "20.999999999999996;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "58.00000000000001;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
                   )
                 ]
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-footer" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "mr-3 btn btn-sm btn-secondary",
+                    attrs: { to: "/notes/table" }
+                  },
+                  [_vm._v("Back to List")]
+                )
+              ],
+              1
+            )
           ])
         ])
       ]
@@ -28193,26 +28534,178 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c(
-                    "router-link",
-                    {
-                      staticClass: "mr-3 btn btn-sm btn-secondary",
-                      attrs: { to: "/notes/table" }
-                    },
-                    [_vm._v("Back to List")]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "button",
                     {
-                      staticClass: "btn btn-sm btn-primary",
+                      staticClass:
+                        "btn btn-sm btn-primary d-flex align-items-center",
                       attrs: { type: "submit" }
                     },
-                    [_vm._v("\n              Update\n            ")]
+                    [
+                      _vm._v("\n              Update\n              "),
+                      _vm.loading
+                        ? [
+                            _c(
+                              "svg",
+                              {
+                                staticStyle: {
+                                  margin: "auto",
+                                  background: "none",
+                                  display: "block",
+                                  "shape-rendering": "auto"
+                                },
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                                  width: "30px",
+                                  height: "22px",
+                                  viewBox: "0 0 100 100",
+                                  preserveAspectRatio: "xMidYMid"
+                                }
+                              },
+                              [
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "17.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#85a2b6"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "18;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.2s"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "64;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.2s"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "42.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#bbcedd"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "20.999999999999996;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.1s"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "58.00000000000001;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1",
+                                        begin: "-0.1s"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "rect",
+                                  {
+                                    attrs: {
+                                      x: "67.5",
+                                      y: "30",
+                                      width: "15",
+                                      height: "40",
+                                      fill: "#dce4eb"
+                                    }
+                                  },
+                                  [
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "y",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "20.999999999999996;30;30",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("animate", {
+                                      attrs: {
+                                        attributeName: "height",
+                                        repeatCount: "indefinite",
+                                        dur: "1s",
+                                        calcMode: "spline",
+                                        keyTimes: "0;0.5;1",
+                                        values: "58.00000000000001;40;40",
+                                        keySplines: "0 0.5 0.5 1;0 0.5 0.5 1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
                   )
-                ],
-                1
+                ]
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-footer" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "mr-3 btn btn-sm btn-secondary",
+                    attrs: { to: "/notes/table" }
+                  },
+                  [_vm._v("Back to List")]
+                )
+              ],
+              1
+            )
           ])
         ])
       ]

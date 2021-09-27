@@ -49,6 +49,7 @@ class NoteController extends Controller
             'title' => 'required|min:3',
             'description' => 'required',
         ]);
+        sleep(2);
 
         $subject = Subject::findOrFail(request('subject'));
         $note->update([
@@ -65,6 +66,7 @@ class NoteController extends Controller
 
     public function destroy(Note $note)
     {
+        sleep(2);
         $note->delete();
 
         return response()->json([

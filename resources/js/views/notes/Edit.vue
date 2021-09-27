@@ -57,15 +57,99 @@
                   {{ theErrors.description[0] }}
                 </div>
               </div>
-              <router-link
-                to="/notes/table"
-                class="mr-3 btn btn-sm btn-secondary"
-                >Back to List</router-link
+              <button
+                type="submit"
+                class="btn btn-sm btn-primary d-flex align-items-center"
               >
-              <button type="submit" class="btn btn-sm btn-primary">
                 Update
+                <template v-if="loading">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    style="
+                      margin: auto;
+                      background: none;
+                      display: block;
+                      shape-rendering: auto;
+                    "
+                    width="30px"
+                    height="22px"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="xMidYMid"
+                  >
+                    <rect x="17.5" y="30" width="15" height="40" fill="#85a2b6">
+                      <animate
+                        attributeName="y"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="18;30;30"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                        begin="-0.2s"
+                      ></animate>
+                      <animate
+                        attributeName="height"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="64;40;40"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                        begin="-0.2s"
+                      ></animate>
+                    </rect>
+                    <rect x="42.5" y="30" width="15" height="40" fill="#bbcedd">
+                      <animate
+                        attributeName="y"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="20.999999999999996;30;30"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                        begin="-0.1s"
+                      ></animate>
+                      <animate
+                        attributeName="height"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="58.00000000000001;40;40"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                        begin="-0.1s"
+                      ></animate>
+                    </rect>
+                    <rect x="67.5" y="30" width="15" height="40" fill="#dce4eb">
+                      <animate
+                        attributeName="y"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="20.999999999999996;30;30"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                      ></animate>
+                      <animate
+                        attributeName="height"
+                        repeatCount="indefinite"
+                        dur="1s"
+                        calcMode="spline"
+                        keyTimes="0;0.5;1"
+                        values="58.00000000000001;40;40"
+                        keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                      ></animate>
+                    </rect>
+                  </svg>
+                </template>
               </button>
             </form>
+          </div>
+          <div class="card-footer">
+            <router-link to="/notes/table" class="mr-3 btn btn-sm btn-secondary"
+              >Back to List</router-link
+            >
           </div>
         </div>
       </div>
@@ -81,6 +165,7 @@ export default {
       subjects: [],
       theErrors: [],
       selected: "",
+      loading: false,
     };
   },
 
@@ -110,6 +195,7 @@ export default {
 
     // update the note
     async update() {
+      this.loading = true;
       try {
         this.form["subject"] = this.selected || this.form.subjectId;
 
@@ -118,6 +204,7 @@ export default {
           this.form
         );
         if (response.status === 200) {
+          this.loading = false;
           this.$toasted.show(response.data.message, {
             type: "success",
             icon: "check-double",
@@ -128,6 +215,7 @@ export default {
           this.$router.push("/notes/table");
         }
       } catch (error) {
+        this.loading = false;
         this.$toasted.show("Something went wrong.", {
           type: "error",
           icon: "times",
