@@ -36,9 +36,9 @@
             <router-link :to="{ name: 'notes.create' }" class="dropdown-item"
               >New Note</router-link
             >
-            <!-- <router-link :to="{ name: 'notes.table' }" class="dropdown-item"
+            <router-link :to="{ name: 'notes.table' }" class="dropdown-item"
               >List of Note</router-link
-            > -->
+            >
           </div>
         </li>
       </ul>

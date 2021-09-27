@@ -8,8 +8,9 @@ Route::namespace('Notes')->group(
     fn () =>
     Route::prefix('notes')->group(
         fn () =>
+        Route::get('list', [NoteController::class, 'index']),
         Route::post('create-new-note', [NoteController::class, 'store']),
-        Route::get('', [NoteController::class, 'index'])
+
     ),
     Route::prefix('subjects')->group(
         fn () =>
