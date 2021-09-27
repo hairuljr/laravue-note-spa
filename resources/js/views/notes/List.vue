@@ -12,7 +12,7 @@
                     <th>Title</th>
                     <th>Subject</th>
                     <th>Publish At</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     async getNotes() {
-      let { data } = await axios.get("/api/notes/list");
+      let { data } = await axios.get("/api/notes");
       this.notes = data.data;
     },
   },

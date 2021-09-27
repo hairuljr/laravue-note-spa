@@ -1,6 +1,7 @@
 import Home from '../views/Home'
 import createForm from '../views/notes/CreateForm'
 import ListOfNote from '../views/notes/List'
+import ShowNote from '../views/notes/Show'
 
 export default {
   mode: 'history',
@@ -21,6 +22,10 @@ export default {
       name: 'notes.create',
       component: createForm
     },
-    
+    {
+      path: '/notes/:noteSlug',
+      name: 'notes.show',
+      component: ShowNote
+    },
   ]
 };

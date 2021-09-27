@@ -14,7 +14,10 @@ class NoteController extends Controller
         return NoteResource::collection($notes);
     }
 
-
+    public function show(Note $note)
+    {
+        return NoteResource::make($note);
+    }
 
     public function store()
     {
