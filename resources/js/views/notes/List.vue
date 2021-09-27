@@ -28,6 +28,17 @@
                     </td>
                     <td v-text="note.subject"></td>
                     <td v-text="note.published"></td>
+                    <td>
+                      <router-link
+                        :to="{
+                          name: 'notes.edit',
+                          params: { noteSlug: note.slug },
+                        }"
+                        class="btn btn-sm btn-success"
+                        >Edit</router-link
+                      >
+                      <delete :endpoint="note.slug" />
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -40,7 +51,11 @@
 </template>
 
 <script>
+import Delete from "./Delete";
 export default {
+  components: {
+    Delete,
+  },
   data() {
     return {
       notes: [],

@@ -57,8 +57,14 @@
                   {{ theErrors.description[0] }}
                 </div>
               </div>
-
-              <button type="submit" class="btn btn-primary">Update</button>
+              <router-link
+                to="/notes/table"
+                class="mr-3 btn btn-sm btn-secondary"
+                >Back to List</router-link
+              >
+              <button type="submit" class="btn btn-sm btn-primary">
+                Update
+              </button>
             </form>
           </div>
         </div>
